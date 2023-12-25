@@ -1,95 +1,44 @@
-import React from "react";
-import {styled} from "@mui/material/styles";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell, {tableCellClasses} from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
-import EditIcon from "@mui/icons-material/Edit";
-import {IconButton} from "@mui/material";
-import DeleteIcon from "@mui/icons-material/Delete";
-
-const StyledTableCell = styled(TableCell)(({theme}) => ({
-  [`&.${tableCellClasses.head}`]: {
-    backgroundColor: theme.palette.common.black,
-    color: theme.palette.common.white,
-  },
-  [`&.${tableCellClasses.body}`]: {
-    fontSize: 14,
-  },
-}));
-
-const StyledTableRow = styled(TableRow)(({theme}) => ({
-  "&:nth-of-type(odd)": {
-    backgroundColor: theme.palette.action.hover,
-  },
-  // hide last border
-  "&:last-child td, &:last-child th": {
-    border: 0,
-  },
-}));
-
-const InventoryList = ({products, onDelete, onEdit}) => {
+const InventoryList = ({data, onDelete, onEdit}) => {
   return (
-    <div>
-      <h2>Inventory List</h2>
-      <TableContainer component={Paper}>
-        <Table sx={{minWidth: 700}} aria-label="customized table">
-          <TableHead>
-            <TableRow>
-              <StyledTableCell>Product name</StyledTableCell>
-              <StyledTableCell align="right">Category</StyledTableCell>
-              <StyledTableCell align="right">Brand</StyledTableCell>
-              <StyledTableCell align="right">Price</StyledTableCell>
-              <StyledTableCell align="right">Unit</StyledTableCell>
-              <StyledTableCell align="right">Qty</StyledTableCell>
-              <StyledTableCell align="right">Created_by</StyledTableCell>
-              <StyledTableCell align="right">Click</StyledTableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {products.map((product) => (
-              <StyledTableRow key={product.id}>
-                <StyledTableCell component="th" scope="product">
-                  {product.product_name}
-                </StyledTableCell>
-                <StyledTableCell align="right">
-                  {product.Category}
-                </StyledTableCell>
-                <StyledTableCell align="right">{product.Brand}</StyledTableCell>
-                <StyledTableCell align="right">{product.Price}TK</StyledTableCell>
-                <StyledTableCell align="right">{product.Unit}</StyledTableCell>
-                <StyledTableCell align="right">{product.Qty}</StyledTableCell>
-                <StyledTableCell align="right">
-                  {product.Created_by}
-                </StyledTableCell>
-                <StyledTableCell align="right">
-                  <IconButton aria-label="delete" size="large">
-                    <EditIcon onClick={() => onEdit(product)} />
-                  </IconButton>
-                  <IconButton
-                    aria-label="delete"
-                    size="large"
-                    onClick={() => onDelete(product.id)}
-                  >
-                    <DeleteIcon />
-                  </IconButton>
-                </StyledTableCell>
-              </StyledTableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-      {/* <ul>
-        {products.map((product) => (
-          <li key={product.id}>
-            <button onClick={() => onDelete(product.id)}>Delete</button>
-            <button onClick={() => onEdit(product)}>Edit</button>
-          </li>
-        ))}
-      </ul> */}
+    <div className="container-xxl mb-5">
+      <div className="container-fluid">
+        <div className="table-responsive">
+          <h2 className=" text-center mb-3 mt-3">Inventory List</h2>
+          <table className="table align-middle">
+            <thead className=" text-center">
+              <tr>
+                <th scope="col">No.</th>
+                <th scope="col">Product Name</th>
+                <th scope="col">Category</th>
+                <th scope="col">Brand</th>
+                <th scope="col">Price</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Unit</th>
+                <th scope="col">Created_by</th>
+                <th scope="col">####</th>
+              </tr>
+            </thead>
+            <tbody className=" align-middle text-center">
+              {data.map((product) => (
+                <tr key={product.id}>
+                  <th>{product.id}</th>
+                  <th>{product.product_name}</th>
+                  <th>{product.category}</th>
+                  <th>{product.brand}</th>
+                  <th>{product.price}TK</th>
+                  <th>{product.quantity}</th>
+                  <th>{product.unit}</th>
+                  <th>{product.creator}</th>
+                  <th>
+                    <button className="me-2" onClick={()=> onEdit(product)}>Edit</button>
+                    <button onClick={()=> onDelete(product.id)}>Delete</button>
+                  </th>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   );
 };

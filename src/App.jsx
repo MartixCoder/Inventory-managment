@@ -1,61 +1,23 @@
-import React, {useState} from "react";
-import InventoryList from "./components/InventoryList";
-import AddProduct from "./components/AddProduct";
-import EditProduct from "./components/EditProduct";
-import data from "./data/product"
+import {useState} from "react";
 import Navbar from "./components/Navbar";
+import AddProduct from "./components/AddProduct";
+import InventoryList from "./components/InventoryList";
+import data from "./data/data";
 
 const App = () => {
-  const [products, setProducts] = useState(data);
-  const [editingProduct, setEditingProduct] = useState("");
+  const [products, setProduct] = useState(data);
 
-  const handleAddProduct = (newProduct) => {
-    setProducts([...products, newProduct]);
-  };
-
-  const handleDeleteProduct = (productId) => {
-    setProducts(products.filter((product) => product.id !== productId));
-  };
-
-  const handleEditProduct = (product) => {
-    setEditingProduct(product);
-  };
-
-  const handleSaveEdit = (updatedProduct) => {
-    setProducts(
-      products.map((product) =>
-        product.id === updatedProduct.id ? updatedProduct : product
-      )
-    );
-    setEditingProduct(null);
-  };
-
-  const handleCancelEdit = () => {
-    setEditingProduct(null);
-  };
-
+  // this product id delate funtion
+  const handleDelete = (productId) => {
+    setProduct(products.filter((p) => p.id !== productId));
+  }
+  
+  const handleEdit = ()=> {}
   return (
     <>
       <Navbar />
       <AddProduct />
-      {/* <div>
-        {editingProduct ? (
-          <EditProduct
-            product={editingProduct}
-            onSave={handleSaveEdit}
-            onCancel={handleCancelEdit}
-          />
-        ) : (
-          <div>
-            <AddProduct onAdd={handleAddProduct} />
-            <InventoryList
-              products={products}
-              onDelete={handleDeleteProduct}
-              onEdit={handleEditProduct}
-            />
-          </div>
-        )}
-      </div> */}
+      <InventoryList data={products} onDelete={handleDelete} onEdit={handleEdit}/>
     </>
   );
 };
