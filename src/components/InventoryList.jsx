@@ -30,8 +30,8 @@ const InventoryList = ({data, onDelete, onEdit}) => {
                   <th>{product.unit}</th>
                   <th>{product.creator}</th>
                   <th>
-                    <button className="me-2" onClick={()=> onEdit(product)}>Edit</button>
-                    <button onClick={()=> onDelete(product.id)}>Delete</button>
+                    <button className="btn btn-primary me-2" onClick={()=> onEdit(product)}>Edit</button>
+                    <button className="btn btn-primary" onClick={()=> onDelete(product.id)}>Delete</button>
                   </th>
                 </tr>
               ))}

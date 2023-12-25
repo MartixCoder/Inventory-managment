@@ -1,7 +1,7 @@
-import { useState } from "react";
+import {useState} from "react";
 import newData from "../data/formData";
 
-const AddProduct = () => {
+const AddProduct = ({onAdd}) => {
   const [formData, setFormData] = useState(newData);
 
   const handleChange = (e) => {
@@ -14,7 +14,25 @@ const AddProduct = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Form submitted:", formData);
+    onAdd({
+      product_name: formData.product_name,
+      category: formData.category,
+      brand: formData.brand,
+      price: formData.price,
+      quantity: formData.quantity,
+      unit: formData.unit,
+      creator: formData.creator,
+    });
+    setFormData({
+      id: "",
+      product_name: "",
+      category: "",
+      brand: "",
+      price: "",
+      unit: "",
+      quantity: "",
+      creator: "",
+    });
   };
 
   return (
@@ -96,8 +114,8 @@ const AddProduct = () => {
                   onChange={handleChange}
                 >
                   <option selected>Choose...</option>
-                  <option>PC/Windows</option>
-                  <option>Laptop/mac</option>
+                  <option>PC</option>
+                  <option>Laptop</option>
                   <option>Phone</option>
                 </select>
               </div>
@@ -116,7 +134,9 @@ const AddProduct = () => {
                 </select>
               </div>
               <div className="col-12 text-sm-center">
-                <button className="btn btn-primary" onClick={handleSubmit}>Add Product</button>
+                <button className="btn btn-primary" onClick={handleSubmit}>
+                  Add Product
+                </button>
               </div>
             </form>
           </div>
