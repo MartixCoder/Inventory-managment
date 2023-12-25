@@ -3,6 +3,7 @@ import InventoryList from "./components/InventoryList";
 import AddProduct from "./components/AddProduct";
 import EditProduct from "./components/EditProduct";
 import data from "./data/product"
+import Navbar from "./components/Navbar";
 
 const App = () => {
   const [products, setProducts] = useState(data);
@@ -34,24 +35,28 @@ const App = () => {
   };
 
   return (
-    <div>
-      {editingProduct ? (
-        <EditProduct
-          product={editingProduct}
-          onSave={handleSaveEdit}
-          onCancel={handleCancelEdit}
-        />
-      ) : (
-        <div>
-          <AddProduct onAdd={handleAddProduct} />
-          <InventoryList
-            products={products}
-            onDelete={handleDeleteProduct}
-            onEdit={handleEditProduct}
+    <>
+      <Navbar />
+      <AddProduct />
+      {/* <div>
+        {editingProduct ? (
+          <EditProduct
+            product={editingProduct}
+            onSave={handleSaveEdit}
+            onCancel={handleCancelEdit}
           />
-        </div>
-      )}
-    </div>
+        ) : (
+          <div>
+            <AddProduct onAdd={handleAddProduct} />
+            <InventoryList
+              products={products}
+              onDelete={handleDeleteProduct}
+              onEdit={handleEditProduct}
+            />
+          </div>
+        )}
+      </div> */}
+    </>
   );
 };
 

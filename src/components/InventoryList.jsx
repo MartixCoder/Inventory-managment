@@ -59,7 +59,7 @@ const InventoryList = ({products, onDelete, onEdit}) => {
                   {product.Category}
                 </StyledTableCell>
                 <StyledTableCell align="right">{product.Brand}</StyledTableCell>
-                <StyledTableCell align="right">{product.Price}</StyledTableCell>
+                <StyledTableCell align="right">{product.Price}TK</StyledTableCell>
                 <StyledTableCell align="right">{product.Unit}</StyledTableCell>
                 <StyledTableCell align="right">{product.Qty}</StyledTableCell>
                 <StyledTableCell align="right">
