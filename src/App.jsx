@@ -3,9 +3,11 @@ import Navbar from "./components/Navbar";
 import AddProduct from "./components/AddProduct";
 import InventoryList from "./components/InventoryList";
 import data from "./data/data";
+import EditProduct from "./components/EditProduct";
 
 const App = () => {
   const [products, setProducts] = useState(data);
+  const [editingProduct, setEditingProduct] = useState(null);
 
   // this add product funtion
   const handleAddProduct = (newProduct) => {
@@ -24,17 +26,53 @@ const App = () => {
     ]);
   };
 
+  const handleEditProduct = (product) => {
+    setEditingProduct(product);
+  };
+
+  const handleSaveEdit = (updatedProduct) => {
+    setProducts(
+      products.map((product) =>
+        product.id === updatedProduct.id ? updatedProduct : product
+      )
+    );
+    setEditingProduct(null);
+  };
+
+  const handleCancelEdit = () => {
+    setEditingProduct(null);
+  };
+
   // this product id delate funtion
   const handleDelete = (productId) => {
     setProducts(products.filter((p) => p.id !== productId));
-  }
+  };
 
-  const handleEdit = ()=> {}
   return (
     <>
       <Navbar />
-      <AddProduct onAdd={handleAddProduct}/>
-      <InventoryList data={products} onDelete={handleDelete} onEdit={handleEdit}/>
+      <div>
+        {editingProduct ? (
+          <div>
+            <EditProduct
+              product={editingProduct}
+              onSave={handleSaveEdit}
+              onCancel={handleCancelEdit}
+            />
+          </div>
+        ) : (
+          <div>
+            <div>
+              <AddProduct onAdd={handleAddProduct} />
+            </div>
+            <InventoryList
+              data={products}
+              onDelete={handleDelete}
+              onEdit={handleEditProduct}
+            />
+          </div>
+        )}
+      </div>
     </>
   );
 };

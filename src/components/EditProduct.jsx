@@ -1,13 +1,55 @@
-import React, { useState, useEffect } from "react";
+import React, {useEffect, useState} from "react";
 
-const EditProduct = () => {
+const EditProduct = ({product, onSave, onCancel}) => {
+  const [updateProduct, setUpdateProduct] = useState({
+    product_name: "",
+    category: "",
+    brand: "",
+    price: "",
+    quantity: "",
+    unit: "",
+    creator: "",
+  });
+
+  useEffect(() => {
+    setUpdateProduct({
+      product_name: "",
+      category: "",
+      brand: "",
+      price: "",
+      quantity: "",
+      unit: "",
+      creator: "",
+    });
+  }, [product]);
+
+  const handleUpdateChange = (e) => {
+    const {name, value} = e.target;
+    setUpdateProduct((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  const handleSave = () => {
+    onSave({
+      ...product,
+      product_name: updateProduct.product_name,
+      category: updateProduct.category,
+      brand: updateProduct.brand,
+      price: updateProduct.price,
+      quantity: updateProduct.quantity,
+      unit: updateProduct.unit,
+      creator: updateProduct.creator,
+    });
+  };
 
   return (
     <>
       <div className="container-xxl">
         <div className="bg-body-secondary">
           <div className=" container-fluid text-center p-3">
-            <h3 className="h3">Add Product Sistem</h3>
+            <h3 className="h3">Update Product Sistem</h3>
           </div>
           <div className="container-fluid p-3">
             <form className="row g-3">
@@ -17,6 +59,8 @@ const EditProduct = () => {
                   type="text"
                   className="form-control"
                   name="product_name"
+                  value={updateProduct.product_name}
+                  onChange={handleUpdateChange}
                 />
               </div>
               <div className="col-md-6">
@@ -24,6 +68,8 @@ const EditProduct = () => {
                 <select
                   className="form-select"
                   name="brand"
+                  value={updateProduct.brand}
+                  onChange={handleUpdateChange}
                 >
                   <option selected>Choose...</option>
                   <option>Agro Limited</option>
@@ -37,6 +83,8 @@ const EditProduct = () => {
                 <select
                   className="form-select"
                   name="category"
+                  value={updateProduct.category}
+                  onChange={handleUpdateChange}
                 >
                   <option selected>Choose...</option>
                   <option>Fertilizer</option>
@@ -52,22 +100,17 @@ const EditProduct = () => {
                   className="form-control"
                   placeholder="Price"
                   name="price"
+                  value={parseInt(updateProduct.price)}
+                  onChange={handleUpdateChange}
                 />
               </div>
               <div className="col-md-4">
                 <label className="form-label">Choose Quantity:</label>
-                <input
-                  type="number"
-                  className="form-control"
-                  name="quantity"
-                />
+                <input type="number" className="form-control" name="quantity" value={parseInt(updateProduct.quantity)} onChange={handleUpdateChange}/>
               </div>
               <div className="col-md-4">
                 <label className="form-label">Choose Unit:</label>
-                <select
-                  className="form-select"
-                  name="unit"
-                >
+                <select className="form-select" name="unit" value={updateProduct.unit} onChange={handleUpdateChange}>
                   <option selected>Choose...</option>
                   <option>PC/Windows</option>
                   <option>Laptop/mac</option>
@@ -76,10 +119,7 @@ const EditProduct = () => {
               </div>
               <div className="col-md-4">
                 <label className="form-label">Choose Creator:</label>
-                <select
-                  className="form-select"
-                  name="creator"
-                >
+                <select className="form-select" name="creator" value={updateProduct.creator} onChange={handleUpdateChange}>
                   <option selected>Choose...</option>
                   <option>Administer</option>
                   <option>Manager</option>
@@ -87,36 +127,18 @@ const EditProduct = () => {
                 </select>
               </div>
               <div className="col-12 text-sm-center">
-                <button className="btn btn-primary">
-                  Add Product
+                <button className="btn btn-primary me-3" onClick={handleSave}>
+                  Update Product
+                </button>
+                <button className="btn btn-primary" onClick={onCancel}>
+                  Cancel
                 </button>
               </div>
             </form>
           </div>
         </div>
       </div>
-    </>  
-  // <div>
-    //   <h2>Edit Product</h2>
-    //   <label>
-    //     Product Name:
-    //     <input
-    //       type="text"
-    //       value={productName}
-    //       onChange={(e) => setProductName(e.target.value)}
-    //     />
-    //   </label>
-    //   <label>
-    //     Quantity:
-    //     <input
-    //       type="number"
-    //       value={productPrice}
-    //       onChange={(e) => setProductPrice(e.target.value)}
-    //     />
-    //   </label>
-    //   <button onClick={handleSave}>Save Changes</button>
-    //   <button onClick={onCancel}>Cancel</button>
-    // </div>
+    </>
   );
 };
 
