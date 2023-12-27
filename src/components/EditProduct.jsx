@@ -1,25 +1,26 @@
 import React, {useEffect, useState} from "react";
 
 const EditProduct = ({product, onSave, onCancel}) => {
-  const [updateProduct, setUpdateProduct] = useState({
-    product_name: "",
-    category: "",
-    brand: "",
-    price: "",
-    quantity: "",
-    unit: "",
-    creator: "",
+  const [updateProduct, setUpdateProduct] = useState({...product,
+    product_name: product.product_name,
+    category: product.category,
+    brand: product.brand,
+    price: product.price,
+    quantity: product.quantity,
+    unit: product.unit,
+    creator: product.creator,
   });
 
   useEffect(() => {
     setUpdateProduct({
-      product_name: "",
-      category: "",
-      brand: "",
-      price: "",
-      quantity: "",
-      unit: "",
-      creator: "",
+      ...product,
+      product_name: product.product_name,
+      category: product.category,
+      brand: product.brand,
+      price: product.price,
+      quantity: product.quantity,
+      unit: product.unit,
+      creator: product.creator,
     });
   }, [product]);
 
@@ -112,8 +113,8 @@ const EditProduct = ({product, onSave, onCancel}) => {
                 <label className="form-label">Choose Unit:</label>
                 <select className="form-select" name="unit" value={updateProduct.unit} onChange={handleUpdateChange}>
                   <option selected>Choose...</option>
-                  <option>PC/Windows</option>
-                  <option>Laptop/mac</option>
+                  <option>PC</option>
+                  <option>Laptop</option>
                   <option>Phone</option>
                 </select>
               </div>
@@ -121,7 +122,7 @@ const EditProduct = ({product, onSave, onCancel}) => {
                 <label className="form-label">Choose Creator:</label>
                 <select className="form-select" name="creator" value={updateProduct.creator} onChange={handleUpdateChange}>
                   <option selected>Choose...</option>
-                  <option>Administer</option>
+                  <option>Admin</option>
                   <option>Manager</option>
                   <option>Client</option>
                 </select>

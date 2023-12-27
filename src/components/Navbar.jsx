@@ -6,7 +6,7 @@ const Navbar = () => {
       <nav class="navbar navbar-light bg-primary">
         <div class="container-fluid">
           <a class="navbar-brand text-white" href="#">
-            Inventory Product Managemnt Sistem
+            Inventory Product Management Sistem
           </a>
         </div>
       </nav>

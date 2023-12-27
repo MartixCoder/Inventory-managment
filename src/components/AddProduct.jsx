@@ -128,7 +128,7 @@ const AddProduct = ({onAdd}) => {
                   onChange={handleChange}
                 >
                   <option selected>Choose...</option>
-                  <option>Administer</option>
+                  <option>Admin</option>
                   <option>Manager</option>
                   <option>Client</option>
                 </select>
